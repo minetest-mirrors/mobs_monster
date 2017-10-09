@@ -41,7 +41,7 @@ mobs:register_mob("mobs_monster:spider", {
 	light_damage = 0,
 	animation = {
 		speed_normal = 15,
-		speed_run = 15,
+		speed_run = 20,--15,
 		stand_start = 1,
 		stand_end = 1,
 		walk_start = 20,

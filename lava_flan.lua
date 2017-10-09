@@ -84,7 +84,6 @@ mobs:spawn({
 
 mobs:register_egg("mobs_monster:lava_flan", S("Lava Flan"), "default_lava.png", 1)
 
-
 mobs:alias_mob("mobs:lava_flan", "mobs_monster:lava_flan") -- compatibility
 
 
