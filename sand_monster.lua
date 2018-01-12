@@ -19,7 +19,7 @@ local effect = function(pos, amount, texture, min_size, max_size, radius, gravit
 		minvel = {x = -radius, y = -radius, z = -radius},
 		maxvel = {x = radius, y = radius, z = radius},
 		minacc = {x = 0, y = gravity, z = 0},
-		maxacc = {x = 0, y = gravity, z = 0},
+		maxacc = {x = -20, y = gravity, z = 15},
 		minexptime = 0.1,
 		maxexptime = 1,
 		minsize = min_size,
@@ -49,9 +49,7 @@ mobs:register_mob("mobs_monster:sand_monster", {
 	textures = {
 		{"mobs_sand_monster.png"},
 	},
-	blood_texture = {
-		"default_desert_sand.png", "default_sand.png"
-	},
+	blood_texture = "default_desert_sand.png",
 	makes_footstep_sound = true,
 	sounds = {
 		random = "mobs_sandmonster",
@@ -88,9 +86,9 @@ mobs:register_mob("mobs_monster:sand_monster", {
 ]]
 	on_die = function(self, pos)
 		pos.y = pos.y + 0.5
-		effect(pos, 20, "default_desert_sand.png", nil, nil, 0.5, nil)
+		effect(pos, 30, "mobs_sand_particles.png", 0.1, 2, 3, 5)
 		pos.y = pos.y + 0.25
-		effect(pos, 20, "default_desert_sand.png", nil, nil, 1, nil)
+		effect(pos, 30, "mobs_sand_particles.png", 0.1, 2, 3, 5)
 	end,
 })
 
