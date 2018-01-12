@@ -49,7 +49,7 @@ mobs:register_mob("mobs_monster:sand_monster", {
 	textures = {
 		{"mobs_sand_monster.png"},
 	},
-	blood_texture = "default_sand.png",
+	blood_texture = "default_desert_sand.png",
 	makes_footstep_sound = true,
 	sounds = {
 		random = "mobs_sandmonster",
@@ -86,9 +86,9 @@ mobs:register_mob("mobs_monster:sand_monster", {
 ]]
 	on_die = function(self, pos)
 		pos.y = pos.y + 0.5
-		effect(pos, 20, "default_sand.png", nil, nil, 0.5, nil)
+		effect(pos, 20, "default_desert_sand.png", nil, nil, 0.5, nil)
 		pos.y = pos.y + 0.25
-		effect(pos, 20, "default_sand.png", nil, nil, 1, nil)
+		effect(pos, 20, "default_desert_sand.png", nil, nil, 1, nil)
 
 	end,
 })
