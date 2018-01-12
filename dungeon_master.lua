@@ -64,8 +64,8 @@ mobs:register_mob("mobs_monster:dungeon_master", {
 mobs:spawn({
 	name = "mobs_monster:dungeon_master",
 	nodes = {"default:stone"},
-	max_light = 7,
-	chance = 7000,
+	max_light = 5,
+	chance = 9000,
 	active_object_count = 1,
 	max_height = -70,
 })
@@ -104,8 +104,10 @@ mobs:register_arrow("mobs_monster:fireball", {
 		}, nil)
 	end,
 
-	-- node hit, bursts into flame
+	-- node hit
 	hit_node = function(self, pos, node)
-		mobs:explosion(pos, 1, 1, 0)
+		mobs:boom(self, pos, 1)
 	end
 })
+
+--minetest.override_item("default:obsidian", {on_blast = function() end})
