@@ -83,13 +83,18 @@ mobs:register_arrow("mobs_monster:fireball", {
 	visual = "sprite",
 	visual_size = {x = 1, y = 1},
 	textures = {"mobs_fireball.png"},
-	collisionbox = {-0.2, -0.2, -0.2, 0.2, 0.2, 0.2},
+	collisionbox = {-0.1, -0.1, -0.1, 0.1, 0.1, 0.1},
 	velocity = 7,
 	tail = 1,
 	tail_texture = "mobs_fireball.png",
 	tail_size = 10,
 	glow = 5,
 	expire = 0.1,
+
+	on_activate = function(self, staticdata, dtime_s)
+		-- make fireball indestructable
+		self.object:set_armor_groups({immortal = 1, fleshy = 100})
+	end,
 
 	-- if player has a good weapon with 7+ damage it can deflect fireball
 	on_punch = function(self, hitter, tflp, tool_capabilities, dir)
@@ -99,7 +104,9 @@ mobs:register_arrow("mobs_monster:fireball", {
 			local damage = tool_capabilities.damage_groups and
 				tool_capabilities.damage_groups.fleshy or 1
 
-			if damage > 6 then
+			local tmp = tflp / (tool_capabilities.full_punch_interval or 1.4)
+
+			if damage > 6 and tmp < 4 then
 
 				self.object:set_velocity({
 					x = dir.x * self.velocity,
