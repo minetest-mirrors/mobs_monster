@@ -159,7 +159,7 @@ mobs:spawn({
 	name = "mobs_monster:spider",
 	nodes = {
 		"default:dirt_with_rainforest_litter", "default:snowblock",
-		"default:snow", "ethereal:crystal_dirt"
+		"default:snow", "ethereal:crystal_dirt", "ethereal:cold_dirt"
 	},
 	min_light = 0,
 	max_light = 8,
