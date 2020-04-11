@@ -5,6 +5,9 @@ local get_velocity = function(self)
 
 	local v = self.object:get_velocity()
 
+	-- sanity check
+	if not v then return 0 end
+
 	return (v.x * v.x + v.z * v.z) ^ 0.5
 end
 
@@ -118,6 +121,9 @@ mobs:register_mob("mobs_monster:spider", {
 
 		local pos = self.object:get_pos()
 		local yaw = self.object:get_yaw()
+
+		-- sanity check
+		if not yaw then return end
 
 		pos.y = pos.y + self.collisionbox[2] - 0.2
 
