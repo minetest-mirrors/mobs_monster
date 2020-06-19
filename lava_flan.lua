@@ -78,6 +78,39 @@ mobs:register_mob("mobs_monster:lava_flan", {
 		})
 	end,
 	glow = 10,
+	on_die = function(self, pos)
+
+		local cod = self.cause_of_death or {}
+		local def = cod.node and minetest.registered_nodes[cod.node]
+
+		if def and def.groups and def.groups.water then
+
+			pos.y = pos.y + 1
+
+			minetest.add_particlespawner({
+				amount = 40,
+				time = 0.25,
+				minpos = pos,
+				maxpos = pos,
+				minvel = {x = -2, y = 0, z = -2},
+				maxvel = {x = 2, y = 2, z = 2},
+				minacc = {x = 0, y = 0, z = 0},
+				maxacc = {x = 0, y = 10, z = 0},
+				minexptime = 0.1,
+				maxexptime = 1,
+				minsize = 3.0,
+				maxsize = 5.0,
+				texture = "tnt_smoke.png",
+			})
+
+			minetest.sound_play("fire_extinguish_flame",
+				{pos = pos, max_hear_distance = 12, gain = 1.5}, true)
+
+			if math.random(4) == 1 then
+				minetest.add_entity(pos, "mobs_monster:obsidian_flan")
+			end
+		end
+	end,
 })
 
 
@@ -188,3 +221,129 @@ minetest.override_item("mobs:pick_lava", {
 	description = toolranks.create_description("Lava Pickaxe", 0, 1),
 	after_use = toolranks.new_afteruse})
 end
+
+
+-- obsidian flan
+
+mobs:register_mob("mobs_monster:obsidian_flan", {
+	type = "monster",
+	passive = false,
+	attack_type = "shoot",
+	shoot_interval = 0.5,
+	shoot_offset = 1.0,
+	arrow = "mobs_monster:obsidian_arrow",
+	reach = 2,
+	damage = 3,
+	hp_min = 10,
+	hp_max = 35,
+	armor = 20,
+	visual_size = {x = 0.6, y = 0.6},
+	collisionbox = {-0.3, -0.3, -0.3, 0.3, 0.8, 0.3},
+	visual = "mesh",
+	mesh = "zmobs_lava_flan.x",
+	textures = {
+		{"mobs_obsidian_flan.png"},
+	},
+	blood_texture = "default_obsidian.png",
+	makes_footstep_sound = true,
+	sounds = {
+		random = "mobs_lavaflan",
+--		war_cry = "mobs_lavaflan",
+	},
+	walk_velocity = 0.1,
+	run_velocity = 0.5,
+	jump = false,
+	view_range = 10,
+	floats = 0,
+	drops = {
+		{name = "default:obsidian_shard", chance = 1, min = 1, max = 5},
+	},
+	water_damage = 0,
+	lava_damage = 0,
+	light_damage = 0,
+	animation = {
+		speed_normal = 15,
+		speed_run = 15,
+		stand_start = 0,
+		stand_end = 8,
+		walk_start = 10,
+		walk_end = 18,
+		run_start = 20,
+		run_end = 28,
+		punch_start = 20,
+		punch_end = 28,
+	}
+})
+
+mobs:register_egg("mobs_monster:obsidian_flan", S("Obsidian Flan"),
+		"default_obsidian.png", 1)
+
+
+local mobs_griefing = minetest.settings:get_bool("mobs_griefing") ~= false
+
+-- mese arrow (weapon)
+mobs:register_arrow("mobs_monster:obsidian_arrow", {
+	visual = "sprite",
+--	visual = "wielditem",
+	visual_size = {x = 0.5, y = 0.5},
+	textures = {"default_obsidian_shard.png"},
+	velocity = 6,
+--	rotate = 180,
+
+	hit_player = function(self, player)
+		player:punch(self.object, 1.0, {
+			full_punch_interval = 1.0,
+			damage_groups = {fleshy = 8},
+		}, nil)
+	end,
+
+	hit_mob = function(self, player)
+		player:punch(self.object, 1.0, {
+			full_punch_interval = 1.0,
+			damage_groups = {fleshy = 8},
+		}, nil)
+	end,
+
+	hit_node = function(self, pos, node)
+
+		if mobs_griefing == false or minetest.is_protected(pos, "") then
+			return
+		end
+
+		local texture = "default_dirt.png" --fallback texture
+
+		local radius = 1
+		local def = minetest.registered_nodes[node]
+		if def then
+			node = { name = node }
+		end
+		if def and def.tiles and def.tiles[1] then
+			texture = def.tiles[1]
+		end
+
+		if def.groups and def.groups.level == 2 then
+			return
+		end
+
+		minetest.add_particlespawner({
+			amount = 32,
+			time = 0.1,
+			minpos = vector.subtract(pos, radius / 2),
+			maxpos = vector.add(pos, radius / 2),
+			minvel = {x = -3, y = 0, z = -3},
+			maxvel = {x = 3, y = 5,  z = 3},
+			minacc = {x = 0, y = -10, z = 0},
+			maxacc = {x = 0, y = -10, z = 0},
+			minexptime = 0.8,
+			maxexptime = 2.0,
+			minsize = radius * 0.33,
+			maxsize = radius,
+			texture = texture,
+			-- ^ only as fallback for clients without support for `node` parameter
+			node = node,
+			collisiondetection = true,
+		})
+
+		minetest.set_node(pos, {name = "air"})
+	end
+})
