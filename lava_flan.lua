@@ -55,31 +55,6 @@ mobs:register_mob("mobs_monster:lava_flan", {
 	},
 	on_die = function(self, pos)
 
-		if minetest.get_node(pos).name == "air" then
-			minetest.set_node(pos, {name = "fire:basic_flame"})
-		end
-
-		self.object:remove()
-
-		minetest.add_particlespawner({
-			amount = 20,
-			time = 0.25,
-			minpos = pos,
-			maxpos = pos,
-			minvel = {x = -2, y = -2, z = -2},
-			maxvel = {x = 2, y = 2, z = 2},
-			minacc = {x = 0, y = -10, z = 0},
-			maxacc = {x = 0, y = -10, z = 0},
-			minexptime = 0.1,
-			maxexptime = 1,
-			minsize = 1.0,
-			maxsize = 2.0,
-			texture = "fire_basic_flame.png",
-		})
-	end,
-	glow = 10,
-	on_die = function(self, pos)
-
 		local cod = self.cause_of_death or {}
 		local def = cod.node and minetest.registered_nodes[cod.node]
 
@@ -106,11 +81,36 @@ mobs:register_mob("mobs_monster:lava_flan", {
 			minetest.sound_play("fire_extinguish_flame",
 				{pos = pos, max_hear_distance = 12, gain = 1.5}, true)
 
+			self.object:remove()
+
 			if math.random(4) == 1 then
 				minetest.add_entity(pos, "mobs_monster:obsidian_flan")
 			end
+		else
+			if minetest.get_node(pos).name == "air" then
+				minetest.set_node(pos, {name = "fire:basic_flame"})
+			end
+
+			minetest.add_particlespawner({
+				amount = 20,
+				time = 0.25,
+				minpos = pos,
+				maxpos = pos,
+				minvel = {x = -2, y = -2, z = -2},
+				maxvel = {x = 2, y = 2, z = 2},
+				minacc = {x = 0, y = -10, z = 0},
+				maxacc = {x = 0, y = -10, z = 0},
+				minexptime = 0.1,
+				maxexptime = 1,
+				minsize = 1.0,
+				maxsize = 2.0,
+				texture = "fire_basic_flame.png",
+			})
+
+			self.object:remove()
 		end
 	end,
+	glow = 10,
 })
 
 
@@ -236,7 +236,7 @@ mobs:register_mob("mobs_monster:obsidian_flan", {
 	damage = 3,
 	hp_min = 10,
 	hp_max = 35,
-	armor = 20,
+	armor = 30,
 	visual_size = {x = 0.6, y = 0.6},
 	collisionbox = {-0.3, -0.3, -0.3, 0.3, 0.8, 0.3},
 	visual = "mesh",
@@ -345,5 +345,9 @@ mobs:register_arrow("mobs_monster:obsidian_arrow", {
 		})
 
 		minetest.set_node(pos, {name = "air"})
+
+		local snd = def.sounds and def.sounds.dug or "default_dig_crumbly"
+
+		minetest.sound_play(snd, {pos = pos, max_hear_distance = 12, gain = 1.0}, true)
 	end
 })
