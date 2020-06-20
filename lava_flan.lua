@@ -62,21 +62,7 @@ mobs:register_mob("mobs_monster:lava_flan", {
 
 			pos.y = pos.y + 1
 
-			minetest.add_particlespawner({
-				amount = 40,
-				time = 0.25,
-				minpos = pos,
-				maxpos = pos,
-				minvel = {x = -2, y = 0, z = -2},
-				maxvel = {x = 2, y = 2, z = 2},
-				minacc = {x = 0, y = 0, z = 0},
-				maxacc = {x = 0, y = 10, z = 0},
-				minexptime = 0.1,
-				maxexptime = 1,
-				minsize = 3.0,
-				maxsize = 5.0,
-				texture = "tnt_smoke.png",
-			})
+			mobs:effect(pos, 40, "tnt_smoke.png", 3, 5, 2, 0.5, nil, false)
 
 			minetest.sound_play("fire_extinguish_flame",
 				{pos = pos, max_hear_distance = 12, gain = 1.5}, true)
@@ -91,21 +77,7 @@ mobs:register_mob("mobs_monster:lava_flan", {
 				minetest.set_node(pos, {name = "fire:basic_flame"})
 			end
 
-			minetest.add_particlespawner({
-				amount = 20,
-				time = 0.25,
-				minpos = pos,
-				maxpos = pos,
-				minvel = {x = -2, y = -2, z = -2},
-				maxvel = {x = 2, y = 2, z = 2},
-				minacc = {x = 0, y = -10, z = 0},
-				maxacc = {x = 0, y = -10, z = 0},
-				minexptime = 0.1,
-				maxexptime = 1,
-				minsize = 1.0,
-				maxsize = 2.0,
-				texture = "fire_basic_flame.png",
-			})
+			mobs:effect(pos, 40, "fire_basic_flame.png", 2, 3, 2, 5, 10, nil)
 
 			self.object:remove()
 		end
