@@ -293,7 +293,9 @@ mobs:register_arrow("mobs_monster:obsidian_arrow", {
 			texture = def.tiles[1]
 		end
 
-		if def.groups and def.groups.level == 2 then
+		-- do not break obsidian or diamond blocks or unbreakable nodes
+		if (def.groups and def.groups.level and def.groups.level > 1)
+		or def.groups.unbreakable then
 			return
 		end
 
