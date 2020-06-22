@@ -70,7 +70,9 @@ mobs:register_mob("mobs_monster:lava_flan", {
 			self.object:remove()
 
 			if math.random(4) == 1 then
-				minetest.add_entity(pos, "mobs_monster:obsidian_flan")
+				mobs:add_mob(pos, {
+					name = "mobs_monster:obsidian_flan",
+				})
 			end
 		else
 			if minetest.get_node(pos).name == "air" then
@@ -229,9 +231,10 @@ mobs:register_mob("mobs_monster:obsidian_flan", {
 	floats = 0,
 	drops = {
 		{name = "default:obsidian_shard", chance = 1, min = 1, max = 5},
+		{name = "default:obsidian", chance = 3, min = 0, max = 2},
 	},
 	water_damage = 0,
-	lava_damage = 0,
+	lava_damage = 8,
 	light_damage = 0,
 	animation = {
 		speed_normal = 15,
