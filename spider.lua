@@ -30,7 +30,8 @@ local spider_types = {
 	{	nodes = {"default:stone", "default:gravel"},
 		skins = {"mobs_spider_grey.png"},
 		docile = nil,
-		drops = nil
+		drops = nil,
+		small = true
 	},
 
 	{	nodes = {"default:mese", "default:stone_with_mese"},
@@ -132,6 +133,13 @@ mobs:register_mob("mobs_monster:spider", {
 					self.dogshoot_count2_max = 20
 					self.shoot_interval = 2
 					self.shoot_offset = 2
+				end
+
+				if tmp.small then
+					self.object:set_properties({
+						collisionbox = {-0.2, -0.2, -0.2, 0.2, 0, 0.2},
+						visual_size = {x = 0.25, y = 0.25}
+					})
 				end
 
 				return true
