@@ -60,7 +60,7 @@ mobs:register_mob("mobs_monster:dirt_monster", {
 		punch_end = 63,
 	},
 
-	-- check surrounding nodes and spawn a specific spider
+	-- check surrounding nodes and spawn a specific monster
 	on_spawn = function(self)
 
 		local pos = self.object:get_pos() ; pos.y = pos.y - 1

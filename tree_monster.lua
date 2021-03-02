@@ -98,7 +98,7 @@ mobs:register_mob("mobs_monster:tree_monster", {
 		punch_end = 62,
 	},
 
-	-- check surrounding nodes and spawn a specific spider
+	-- check surrounding nodes and spawn a specific tree monster
 	on_spawn = function(self)
 
 		local pos = self.object:get_pos() ; pos.y = pos.y - 1

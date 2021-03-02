@@ -27,7 +27,7 @@ Sand Monster
 
 Spiders
 
-- Snowy spiders are found on higher cold areas, Tarantula's in higher jungle, Cave spider below -20 and Mese spider near areas containing the ore and Crystal spiders only in Ethereal's crystal biomes.  Some are docile during the daytime and will drop string when killed.
+- Snowy spiders are found on higher cold areas, spitting Tarantula's in higher jungle, small Cave spider below -20 and Mese spider near areas containing the ore and Crystal spiders only in Ethereal's crystal biomes.  Some are docile during the daytime and will drop string when killed.
 
 Stone Monster
 
@@ -36,5 +36,9 @@ Stone Monster
 Tree Monster
 
 - Found atop tree's at night time they drop down and look for food in the form of players and animals. Can drop saplings and sometimes an apple or three.
+
+Land Guard
+
+- These huge monsters roam the land in cold, hot and temperate areas and don't like players wandering around their domain.
 
 Lucky Blocks: 11
