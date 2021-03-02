@@ -31,7 +31,17 @@ local tree_types = {
 			{name = "ethereal:yellow_tree_sapling", chance = 2, min = 0, max = 2},
 			{name = "ethereal:golden_apple", chance = 3, min = 0, max = 2},
 		}
-	}
+	},
+
+	{	nodes = {"default:acacia_bush_leaves"},
+		skins = {"mobs_tree_monster6.png"},
+		drops = {
+			{name = "tnt:gunpowder", chance = 1, min = 0, max = 2},
+			{name = "default:iron_lump", chance = 5, min = 0, max = 2},
+			{name = "default:coal_lump", chance = 3, min = 0, max = 3}
+		},
+		explode = true
+	},
 }
 
 
@@ -45,8 +55,8 @@ mobs:register_mob("mobs_monster:tree_monster", {
 	--specific_attack = {"player", "mobs_animal:chicken"},
 	reach = 2,
 	damage = 2,
-	hp_min = 7,
-	hp_max = 33,
+	hp_min = 20,
+	hp_max = 40,
 	armor = 100,
 	collisionbox = {-0.4, -1, -0.4, 0.4, 0.8, 0.4},
 	visual = "mesh",
@@ -108,6 +118,8 @@ mobs:register_mob("mobs_monster:tree_monster", {
 
 			tmp = tree_types[n]
 
+			if tmp.explode and math.random(2) == 1 then return true end
+
 			if minetest.find_node_near(pos, 1, tmp.nodes) then
 
 				self.base_texture = tmp.skins
@@ -115,6 +127,25 @@ mobs:register_mob("mobs_monster:tree_monster", {
 
 				if tmp.drops then
 					self.drops = tmp.drops
+				end
+
+				if tmp.explode then
+					self.attack_type = "explode"
+					self.explosion_radius = 3
+					self.explosion_timer = 3
+					self.damage = 21
+					self.reach = 3
+					self.fear_height = 4
+					self.water_damage = 2
+					self.lava_damage = 15
+					self.light_damage = 0
+					self.makes_footstep_sound = false
+					self.runaway_from = {"mobs_animal:kitten"}
+					self.sounds = {
+						attack = "tnt_ignite",
+						explode = "tnt_explode",
+						fuse = "tnt_ignite"
+					}
 				end
 
 				return true

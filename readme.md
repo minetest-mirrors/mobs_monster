@@ -35,7 +35,7 @@ Stone Monster
 
 Tree Monster
 
-- Found atop tree's at night time they drop down and look for food in the form of players and animals. Can drop saplings and sometimes an apple or three.
+- Found atop tree's at night time they drop down and look for food in the form of players and animals. Can drop saplings and sometimes an apple or three depending on type.  Also note that green tree creepers exist and sometimes go boom.
 
 Land Guard
 
