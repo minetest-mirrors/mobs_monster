@@ -37,6 +37,7 @@ mobs:register_mob("mobs_monster:lava_flan", {
 	},
 	water_damage = 8,
 	lava_damage = 0,
+	fire_damage = 0,
 	light_damage = 0,
 	immune_to = {
 		{"mobs:pick_lava", -2}, -- lava pick heals 2 health
