@@ -241,6 +241,7 @@ mobs:register_mob("mobs_monster:obsidian_flan", {
 	},
 	water_damage = 0,
 	lava_damage = 8,
+	fire_damage = 0,
 	light_damage = 0,
 	animation = {
 		speed_normal = 15,
