@@ -41,4 +41,8 @@ Land Guard
 
 - These huge monsters roam the land in cold, hot and temperate areas and don't like players wandering around their domain.
 
+Fire Spirit
+
+- Fire Spirits will not tolerate players roaming around their domain and will fiercely attack until their dying puff of smoke.  Will drop it's spirit and some fire dust when using ethereal.
+
 Lucky Blocks: 11

@@ -1,6 +1,16 @@
 
 local S = mobs.intllib
 
+local mob_drops = {
+	{name = "fireflies:firefly", chance = 1, min = 1, max = 1}
+}
+
+if minetest.get_modpath("ethereal") then
+
+	table.insert(mob_drops,
+			{name = "ethereal:fire_dust", chance = 1, min = 1, max = 1})
+end
+
 -- Fire Spirit
 
 mobs:register_mob("mobs_monster:fire_spirit", {
@@ -22,6 +32,8 @@ mobs:register_mob("mobs_monster:fire_spirit", {
 	glow = 14,
 	blood_texture = "fire_basic_flame.png",
 	immune_to = {
+		{"bucket:bucket_water", 1},
+		{"bucket:bucket_river_water", 1},
 		{"all"}
 	},
 	makes_footstep_sound = false,
@@ -34,9 +46,8 @@ mobs:register_mob("mobs_monster:fire_spirit", {
 	walk_velocity = 2,
 	run_velocity = 3,
 	jump = true,
-	drops = {
-		{name = "fireflies:firefly", chance = 2, min = 1, max = 1}
-	},
+	jump_height = 6,
+	drops = mob_drops,
 	water_damage = 1,
 	lava_damage = 0,
 	fire_damage = 0,
@@ -56,7 +67,7 @@ mobs:register_mob("mobs_monster:fire_spirit", {
 
 		self.flame_timer = (self.flame_timer or 0) + dtime
 
-		if self.flame_timer < 0.5 then
+		if self.flame_timer < 0.25 then
 			return
 		end
 
@@ -65,24 +76,23 @@ mobs:register_mob("mobs_monster:fire_spirit", {
 		local pos = self.object:get_pos()
 
 		-- pos, amount, texture, min_size, max_size, radius, gravity, glow, fall
-		mobs:effect(pos, 5, "fire_basic_flame.png", 1, 2, 0.5, 0.5, 14, nil)
-
+		mobs:effect(pos, 5, "fire_basic_flame.png", 1, 2, 0.1, 0.2, 14, nil)
 	end
 })
 
---[[
+
 if not mobs.custom_spawn_monster then
 mobs:spawn({
-	name = "mobs_monster:dirt_monster",
-	nodes = {"default:dirt_with_grass", "ethereal:gray_dirt", "ethereal:dry_dirt"},
-	min_light = 0,
-	max_light = 7,
-	chance = 6000,
-	active_object_count = 2,
-	min_height = 0,
-	day_toggle = false,
+	name = "mobs_monster:fire_spirit",
+	nodes = {"default:obsidian", "caverealms:hot_cobble"},
+	neighbors = {"group:fire"},
+	min_light = 12,
+	max_light = 15,
+	chance = 1500,
+	active_object_count = 1,
+	max_height = -150
 })
 end
-]]
+
 
 mobs:register_egg("mobs_monster:fire_spirit", S("Fire Spirit"), "fire_basic_flame.png", 1)
