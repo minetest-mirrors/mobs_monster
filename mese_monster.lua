@@ -21,7 +21,11 @@ local mese_monster_types = {
 	drops = {
 		{name = "default:mese_crystal", chance = 15, min = 0, max = 1},
 		{name = "default:mese_crystal_fragment", chance = 2, min = 0, max = 1}
-	}
+	},
+	arrow_override = function(self)
+		self.velocity = 6
+		self.damage = 2
+	end
 },
 
 -- mese_monster_green
@@ -47,7 +51,11 @@ local mese_monster_types = {
 	drops = {
 		{name = "default:mese_crystal", chance = 12, min = 0, max = 1},
 		{name = "default:mese_crystal_fragment", chance = 1, min = 0, max = 1}
-	}
+	},
+	arrow_override = function(self)
+		self.velocity = 6
+		self.damage = 2
+	end
 },
 
 -- mese_monster_blue
@@ -78,13 +86,17 @@ local mese_monster_types = {
 		{name = "default:mese", chance = 15, min = 0, max = 1},
 		{name = "default:mese_crystal", chance = 9, min = 0, max = 2},
 		{name = "default:mese_crystal_fragment", chance = 1, min = 0, max = 2}
-	}
+	},
+	arrow_override = function(self)
+		self.velocity = 7
+		self.damage = 3
+	end
 },
 
 -- mese_monster_purple
 {
 	y_min = -3000,
-	y_max = -33000,
+	y_max = -31000,
 	damage = 4,
 	reach = 5,
 	hp_min = 30,
@@ -113,12 +125,16 @@ local mese_monster_types = {
 		{name = "default:mese", chance = 9, min = 0, max = 1},
 		{name = "default:mese_crystal", chance = 6, min = 0, max = 2},
 		{name = "default:mese_crystal_fragment", chance = 1, min = 0, max = 3}
-	}
+	},
+	arrow_override = function(self)
+		self.velocity = 8
+		self.damage = 4
+	end
 }}
 
 
 -- Mese Monster by SirrobZeroone
-mobs:register_mob(":mobs_monster:mese_monster", {
+mobs:register_mob("mobs_monster:mese_monster", {
 	type = "monster",
 	visual_size = {x = 10, y = 10},  -- Got scale wrong in blender by factor of 10 - S01
 	passive = false,
@@ -139,7 +155,7 @@ mobs:register_mob(":mobs_monster:mese_monster", {
 	visual = "mesh",
 	mesh = "mobs_mese_monster.b3d",
 	textures = {
-		{"mobs_mese_monster_purple.png"},
+		{"mobs_mese_monster_purple.png"}
 	},
 	blood_texture = "default_mese_crystal_fragment.png",
 	makes_footstep_sound = false,
@@ -210,6 +226,7 @@ mobs:register_mob(":mobs_monster:mese_monster", {
 			self.armor = def.armor
 			self.immune_to = def.immune_to
 			self.drops = def.drops
+			self.arrow_override = def.arrow_override
 		end
 
 		-- Normal spawn case
@@ -273,18 +290,19 @@ mobs:register_arrow("mobs_monster:mese_arrow", {
 	textures = {"mobs_monster:mese_crystal_fragment_arrow"},
 	velocity = 8,
 	rotate = 180,
+	damage = 2,
 
 	hit_player = function(self, player)
 		player:punch(self.object, 1.0, {
 			full_punch_interval = 1.0,
-			damage_groups = {fleshy = 2},
+			damage_groups = {fleshy = self.damage},
 		}, nil)
 	end,
 
 	hit_mob = function(self, player)
 		player:punch(self.object, 1.0, {
 			full_punch_interval = 1.0,
-			damage_groups = {fleshy = 2},
+			damage_groups = {fleshy = self.damage},
 		}, nil)
 	end,
 
