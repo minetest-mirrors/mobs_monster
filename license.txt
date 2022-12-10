@@ -69,11 +69,12 @@ AspireMint (CC BY-SA 3.0)
   mobs_spider_grey.png
   mobs_spider_crystal.png
 
-mobs_stone_monster.png
-mobs_dungeon_master2.png
-mobs_land_guard.png
-mobs_land_guard2.png
-mobs_land_guard3.png
+Textures by wwar (CC0)
+  mobs_stone_monster.png
+  mobs_dungeon_master2.png
+  mobs_land_guard.png
+  mobs_land_guard2.png
+  mobs_land_guard3.png
 
 Zeg9 (CC BY-SA 3.0)
   zmobs_lava_flan.x
@@ -81,12 +82,12 @@ Zeg9 (CC BY-SA 3.0)
   zmobs_lava_orb.png
 
 Sounds by ()
-mobs_dirtmonster.ogg
-mobs_dungeonmaster.ogg
-mobs_lavaflan.ogg
-mobs_mesemonster.ogg
-mobs_oerkki.ogg
-mobs_sandmonster.ogg
-mobs_spider.ogg
-mobs_stonemonster.ogg
-mobs_treemonster.ogg
+  mobs_dirtmonster.ogg
+  mobs_dungeonmaster.ogg
+  mobs_lavaflan.ogg
+  mobs_mesemonster.ogg
+  mobs_oerkki.ogg
+  mobs_sandmonster.ogg
+  mobs_spider.ogg
+  mobs_stonemonster.ogg
+  mobs_treemonster.ogg
