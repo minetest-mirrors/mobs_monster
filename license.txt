@@ -34,6 +34,11 @@ mobs.fireball.png was originally made by Sapier and edited by Benrob:
 Textures created by wwar (CC0)
   mobs_dungeon_master_nether.png
   mobs_dungeon_master_netherdeep.png
+  mobs_stone_monster.png
+  mobs_dungeon_master2.png
+  mobs_land_guard.png
+  mobs_land_guard2.png
+  mobs_land_guard3.png
 
 Textures and Model created by SirrobZeroone (CC0)
   mobs_mese_monster_red.png
@@ -59,22 +64,16 @@ Pavel_S and PilzAdam (WTFPL)
   mobs_sand_monster2.png
   mobs_stone_monster.b3d
   mobs_tree_monster.b3d
-  mobs_tree_monster*.png
+  mobs_tree_monster*.png (edited by TenPlus1)
 
 AspireMint (CC BY-SA 3.0)
   mobs_spider.b3d
+  mobs_spider.ogg
   mobs_spider_mese.png
   mobs_spider_orange.png
   mobs_spider_snowy.png
   mobs_spider_grey.png
   mobs_spider_crystal.png
-
-Textures by wwar (CC0)
-  mobs_stone_monster.png
-  mobs_dungeon_master2.png
-  mobs_land_guard.png
-  mobs_land_guard2.png
-  mobs_land_guard3.png
 
 Zeg9 (CC BY-SA 3.0)
   zmobs_lava_flan.x
@@ -88,6 +87,5 @@ Sounds by ()
   mobs_mesemonster.ogg
   mobs_oerkki.ogg
   mobs_sandmonster.ogg
-  mobs_spider.ogg
   mobs_stonemonster.ogg
   mobs_treemonster.ogg
