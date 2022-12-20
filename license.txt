@@ -80,7 +80,7 @@ Zeg9 (CC BY-SA 3.0)
   zmobs_lava_flan.png
   zmobs_lava_orb.png
 
-Sounds by ()
+Sounds by (All I remember was that sounds were donated by player from freesound.org)
   mobs_dirtmonster.ogg
   mobs_dungeonmaster.ogg
   mobs_lavaflan.ogg
