@@ -68,7 +68,6 @@ Pavel_S and PilzAdam (WTFPL)
 
 AspireMint (CC BY-SA 3.0)
   mobs_spider.b3d
-  mobs_spider.ogg
   mobs_spider_mese.png
   mobs_spider_orange.png
   mobs_spider_snowy.png
@@ -80,7 +79,7 @@ Zeg9 (CC BY-SA 3.0)
   zmobs_lava_flan.png
   zmobs_lava_orb.png
 
-Sounds by (All I remember was that sounds were donated by player from freesound.org)
+Sounds by Cyberpangolin (WTFPL) https://forum.minetest.net/viewtopic.php?t=10798
   mobs_dirtmonster.ogg
   mobs_dungeonmaster.ogg
   mobs_lavaflan.ogg
