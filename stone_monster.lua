@@ -10,6 +10,15 @@ local stone_types = {
 			{name = "default:iron_lump", chance = 5, min = 0, max = 2},
 			{name = "default:gold_lump", chance = 5, min = 0, max = 2}
 		}
+	},
+
+	{	nodes = {"default:sandstone"},
+		skins = {"mobs_stone_monster4.png"},
+		drops = {
+			{name = "default:sandstone", chance = 1, min = 0, max = 2},
+			{name = "default:tin_lump", chance = 5, min = 0, max = 2},
+			{name = "default:copper_lump", chance = 5, min = 0, max = 2}
+		}
 	}
 }
 

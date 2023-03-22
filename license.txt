@@ -40,6 +40,16 @@ Textures created by wwar (CC0)
   mobs_land_guard2.png
   mobs_land_guard3.png
 
+Textures by AMMOnym (WTFPL)
+  mobs_stone_monster2.png
+
+Textures by TenPlus1 (MIT)
+  mobs_stone_monster3.png
+
+Textures by Sirrobzeroone (CC0 1.0 Universal)
+  mobs_stone_monster4.png
+  mobs_sand_monster.png
+
 Textures and Model created by SirrobZeroone (CC0)
   mobs_mese_monster_red.png
   mobs_mese_monster_blue.png
@@ -49,7 +59,6 @@ Textures and Model created by SirrobZeroone (CC0)
   mobs_mese_monster.b3d
 
 Pavel_S and PilzAdam (WTFPL)
-  mobs_dirt_monster.b3d
   mobs_dirt_monster.png
   mobs_dirt_monster2.png
   mobs_dirt_monster3.png
@@ -59,10 +68,9 @@ Pavel_S and PilzAdam (WTFPL)
   mobs_fireball.ogg
   mobs_oerkki.b3d
   mobs_oerkki.png
-  mobs_sand_monster.b3d
-  mobs_sand_monster.png
+  mobs_sand_monster.b3d [edited by SirrobZeroone]
   mobs_sand_monster2.png
-  mobs_stone_monster.b3d
+  mobs_stone_monster.b3d [edited by SirrobZeroone]
   mobs_tree_monster.b3d
   mobs_tree_monster*.png (edited by TenPlus1)
 
