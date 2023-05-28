@@ -226,6 +226,7 @@ mobs:register_mob("mobs_monster:mese_monster", {
 		local function update(self, def)
 
 			self.object:set_properties({textures = def.skins})
+			self.base_texture = def.skins
 
 			-- added by mobs_redo
 			self.hp_min = def.hp_min
