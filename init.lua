@@ -37,18 +37,29 @@ if input then
 end
 
 
+-- helper function
+local function ddoo(mob)
+
+	if minetest.settings:get_bool("mobs_monster." .. mob) == false then
+		print("[Mobs_Monster] " .. mob .. " disabled!")
+		return
+	end
+
+	dofile(path .. mob .. ".lua")
+end
+
 -- Monsters
-dofile(path .. "dirt_monster.lua") -- PilzAdam
-dofile(path .. "dungeon_master.lua")
-dofile(path .. "oerkki.lua")
-dofile(path .. "sand_monster.lua")
-dofile(path .. "stone_monster.lua")
-dofile(path .. "tree_monster.lua")
-dofile(path .. "lava_flan.lua") -- Zeg9
-dofile(path .. "mese_monster.lua")
-dofile(path .. "spider.lua") -- AspireMint
-dofile(path .. "land_guard.lua")
-dofile(path .. "fire_spirit.lua")
+ddoo("dirt_monster") -- PilzAdam
+ddoo("dungeon_master")
+ddoo("oerkki")
+ddoo("sand_monster")
+ddoo("stone_monster")
+ddoo("tree_monster")
+ddoo("lava_flan") -- Zeg9
+ddoo("mese_monster")
+ddoo("spider") -- AspireMint
+ddoo("land_guard")
+ddoo("fire_spirit")
 
 
 -- Load custom spawning
