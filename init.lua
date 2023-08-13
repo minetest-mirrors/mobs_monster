@@ -2,21 +2,8 @@
 -- Load support for intllib.
 local path = minetest.get_modpath(minetest.get_current_modname()) .. "/"
 
--- Check for translation method
-local S
-if minetest.get_translator then
-	S = minetest.get_translator("mobs_monster") -- 5.x translation function
-else -- boilerplate function
-	S = function(str, ...)
-		local args = {...}
-		return str:gsub("@%d+", function(match)
-			return args[tonumber(match:sub(2))]
-		end)
-	end
-end
-
-mobs.intllib_monster = S
-
+-- Translation support
+local S = minetest.get_translator("mobs_monster")
 
 -- Check for custom mob spawn file
 local input = io.open(path .. "spawn.lua", "r")
@@ -65,4 +52,4 @@ if minetest.get_modpath("lucky_block") then
 end
 
 
-print ("[MOD] Mobs Redo Monsters loaded")
+print ("[MOD] Mobs Monster loaded")
