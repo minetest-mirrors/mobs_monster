@@ -171,10 +171,12 @@ mobs:register_mob("mobs_monster:spider", {
 		-- sanity check
 		if not yaw then return end
 
-		pos.y = pos.y + self.collisionbox[2] - 0.2
+		local prop = self.object:get_properties()
 
-		local dir_x = -math.sin(yaw) * (self.collisionbox[4] + 0.5)
-		local dir_z = math.cos(yaw) * (self.collisionbox[4] + 0.5)
+		pos.y = pos.y + prop.collisionbox[2] - 0.2
+
+		local dir_x = -math.sin(yaw) * (prop.collisionbox[4] + 0.5)
+		local dir_z = math.cos(yaw) * (prop.collisionbox[4] + 0.5)
 		local nod = minetest.get_node_or_nil({
 			x = pos.x + dir_x,
 			y = pos.y + 0.5,
