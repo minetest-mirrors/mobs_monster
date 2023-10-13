@@ -203,7 +203,9 @@ mobs:register_mob("mobs_monster:spider", {
 		-- move up facing
 		v.x = 0 ; v.y = 0
 		v.y = self.jump_height
-		mobs:set_animation(self, "jump")
+
+		self:set_animation("jump")
+
 		self.object:set_velocity(v)
 	end,
 
