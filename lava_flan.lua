@@ -138,8 +138,9 @@ local old_handle_node_drops = minetest.handle_node_drops
 
 function minetest.handle_node_drops(pos, drops, digger)
 
-	-- are we holding Lava Pick?
-	if digger and digger:get_wielded_item():get_name() ~= ("mobs:pick_lava") then
+	-- are we the player holding a Lava Pick?
+	if not digger
+	or (digger and digger:get_wielded_item():get_name() ~= ("mobs:pick_lava")) then
 		return old_handle_node_drops(pos, drops, digger)
 	end
 
