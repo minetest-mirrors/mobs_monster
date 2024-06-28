@@ -138,46 +138,43 @@ local old_handle_node_drops = minetest.handle_node_drops
 
 function minetest.handle_node_drops(pos, drops, digger)
 
-	-- are we the player holding a Lava Pick?
-	if not digger
-	or (digger and digger:get_wielded_item():get_name() ~= ("mobs:pick_lava")) then
-		return old_handle_node_drops(pos, drops, digger)
-	end
+	-- are we a player using the lava pick?
+	if digger and digger:get_wielded_item():get_name() == ("mobs:pick_lava") then
 
-	-- reset new smelted drops
-	local hot_drops = {}
+		local hot_drops = {}
 
-	-- loop through current node drops
-	for _, drop in ipairs(drops) do
+		for _, drop in ipairs(drops) do
 
-		-- get cooked output of current drops
-		local stack = ItemStack(drop)
+			local stack = ItemStack(drop)
 
-		while not stack:is_empty() do
+			while not stack:is_empty() do
 
-			local output, decremented_input = minetest.get_craft_result({
-				method = "cooking",
-				width = 1,
-				items = {stack}
-			})
+				local output, decremented_input = minetest.get_craft_result({
+					method = "cooking",
+					width = 1,
+					items = {stack}
+				})
 
-			if output.item:is_empty() then
+				if output.item:is_empty() then
 
-				table.insert_all(hot_drops, decremented_input.items)
-				break
-			else
-				if not output.item:is_empty() then
-					table.insert(hot_drops, output.item)
+					table.insert_all(hot_drops, decremented_input.items)
+					break
+				else
+					if not output.item:is_empty() then
+						table.insert(hot_drops, output.item)
+					end
+
+					table.insert_all(hot_drops, output.replacements)
+
+					stack = decremented_input.items[1] or ItemStack()
 				end
-
-				table.insert_all(hot_drops, output.replacements)
-
-				stack = decremented_input.items[1] or ItemStack()
 			end
 		end
+
+		drops = hot_drops -- replace normal drops with cooked versions
 	end
 
-	return old_handle_node_drops(pos, hot_drops, digger)
+	return old_handle_node_drops(pos, drops, digger)
 end
 
 minetest.register_tool(":mobs:pick_lava", {
