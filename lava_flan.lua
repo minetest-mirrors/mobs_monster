@@ -142,6 +142,7 @@ function minetest.handle_node_drops(pos, drops, digger)
 	if digger and digger:get_wielded_item():get_name() == ("mobs:pick_lava") then
 
 		local hot_drops = {}
+		local is_cooked
 
 		for _, drop in ipairs(drops) do
 
@@ -156,10 +157,11 @@ function minetest.handle_node_drops(pos, drops, digger)
 				})
 
 				if output.item:is_empty() then
-
 					table.insert_all(hot_drops, decremented_input.items)
 					break
 				else
+					is_cooked = true
+
 					if not output.item:is_empty() then
 						table.insert(hot_drops, output.item)
 					end
@@ -172,6 +174,14 @@ function minetest.handle_node_drops(pos, drops, digger)
 		end
 
 		drops = hot_drops -- replace normal drops with cooked versions
+
+		if is_cooked then
+
+			mobs:effect(pos, 1, "tnt_smoke.png", 3, 5, 2, 0.5, nil, false)
+
+			minetest.sound_play("fire_extinguish_flame",
+					{pos = pos, max_hear_distance = 8, gain = 0.15}, true)
+		end
 	end
 
 	return old_handle_node_drops(pos, drops, digger)
