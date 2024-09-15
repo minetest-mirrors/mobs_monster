@@ -270,6 +270,7 @@ mobs:register_mob("mobs_monster:obsidian_flan", {
 })
 
 -- spawn egg
+
 mobs:register_egg("mobs_monster:obsidian_flan", S("Obsidian Flan"),
 		"default_obsidian.png", 1)
 
