@@ -68,7 +68,7 @@ mobs:register_mob("mobs_monster:spider", {
 	damage = 3,
 	hp_min = 10,
 	hp_max = 30,
-	armor = 200,
+	armor = 100,
 	collisionbox = {-0.7, -0.5, -0.7, 0.7, 0, 0.7},
 	visual_size = {x = 1, y = 1},
 	visual = "mesh",
