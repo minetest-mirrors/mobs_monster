@@ -41,9 +41,10 @@ mobs:register_mob("mobs_monster:lava_flan", {
 	immune_to = {
 		{"mobs:pick_lava", -2}, -- lava pick heals 2 health
 		{"default:lava_source", 0}, -- so that damage per second doesnt affect mob
-		{"default:lava_flowing", 0}
+		{"default:lava_flowing", 0},
+		{"nether:lava_source", 0},
 	},
-	fly_in = {"default:lava_source", "default:lava_flowing"},
+	fly_in = {"default:lava_source", "default:lava_flowing", "nether:lava_source"},
 	animation = {
 		speed_normal = 15,
 		speed_run = 15,
