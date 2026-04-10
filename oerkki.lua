@@ -13,7 +13,7 @@ mobs:register_mob("mobs_monster:oerkki", {
 	hp_min = 8,
 	hp_max = 34,
 	armor = 100,
-	collisionbox = {-0.4, -1, -0.4, 0.4, 0.9, 0.4},
+	collisionbox = {-0.35, -1, -0.35, 0.35, 0.85, 0.35},
 	visual = "mesh",
 	mesh = "mobs_oerkki.b3d",
 	textures = {
@@ -26,7 +26,6 @@ mobs:register_mob("mobs_monster:oerkki", {
 	walk_velocity = 1,
 	run_velocity = 3,
 	view_range = 10,
-	jump = true,
 	drops = {
 		{name = "default:obsidian", chance = 3, min = 0, max = 2},
 		{name = "default:gold_lump", chance = 2, min = 0, max = 2}

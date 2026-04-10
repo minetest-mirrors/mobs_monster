@@ -55,8 +55,7 @@ mobs:register_mob("mobs_monster:land_guard", {
 	sounds = {random = "mobs_dungeonmaster"},
 	walk_velocity = 1.5,
 	run_velocity = 3.4,
-	jump = true,
-	jump_height = 2.0,
+	jump_height = 2,
 	floats = 0,
 	view_range = 15,
 	drops = {
@@ -71,6 +70,7 @@ mobs:register_mob("mobs_monster:land_guard", {
 	animation = {
 		stand_start = 0, stand_end = 19,
 		walk_start = 20, walk_end = 35,
+		run_start = 20, run_end = 35, run_speed = 40,
 		punch_start = 36, punch_end = 48,
 		speed_normal = 15, speed_run = 20,
 	},

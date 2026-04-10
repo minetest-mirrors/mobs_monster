@@ -46,7 +46,6 @@ mobs:register_mob("mobs_monster:dungeon_master", {
 	},
 	walk_velocity = 1,
 	run_velocity = 3,
-	jump = true,
 	view_range = 15,
 	drops = {
 		{name = "default:mese_crystal_fragment", chance = 1, min = 0, max = 2},
@@ -62,6 +61,7 @@ mobs:register_mob("mobs_monster:dungeon_master", {
 	animation = {
 		stand_start = 0, stand_end = 19,
 		walk_start = 20, walk_end = 35,
+		run_start = 20, run_end = 35, run_speed = 40,
 		punch_start = 36, punch_end = 48,
 		shoot_start = 36, shoot_end = 48,
 		speed_normal = 15, speed_run = 15

@@ -59,7 +59,7 @@ mobs:register_mob("mobs_monster:tree_monster", {
 	hp_min = 20,
 	hp_max = 40,
 	armor = 100,
-	collisionbox = {-0.4, -1, -0.4, 0.4, 0.8, 0.4},
+	collisionbox = {-0.3, -1, -0.3, 0.3, 0.75, 0.3},
 	visual = "mesh",
 	mesh = "mobs_tree_monster.b3d",
 	textures = {
@@ -71,7 +71,6 @@ mobs:register_mob("mobs_monster:tree_monster", {
 	sounds = {random = "mobs_treemonster"},
 	walk_velocity = 1,
 	run_velocity = 3,
-	jump = true,
 	view_range = 15,
 	drops = {
 		{name = "default:stick", chance = 1, min = 0, max = 2},
@@ -98,7 +97,7 @@ mobs:register_mob("mobs_monster:tree_monster", {
 		speed_normal = 15, speed_run = 15,
 		stand_start = 0, stand_end = 24,
 		walk_start = 25, walk_end = 47,
-		run_start = 48, run_end = 62,
+		run_start = 48, run_end = 62, run_speed = 35,
 		punch_start = 48, punch_end = 62
 	},
 

@@ -87,7 +87,6 @@ mobs:register_mob("mobs_monster:spider", {
 	},
 	walk_velocity = 1,
 	run_velocity = 3,
-	jump = true,
 	view_range = 15,
 	floats = 0,
 	drops = {
@@ -101,7 +100,7 @@ mobs:register_mob("mobs_monster:spider", {
 		speed_normal = 15, speed_run = 20,
 		stand_start = 0, stand_end = 0,
 		walk_start = 1, walk_end = 21,
-		run_start = 1, run_end = 21,
+		run_start = 1, run_end = 21, run_speed = 40,
 		punch_start = 25, punch_end = 45
 	},
 
