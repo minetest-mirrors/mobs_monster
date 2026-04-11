@@ -171,22 +171,12 @@ mobs:register_mob("mobs_monster:spider", {
 
 		local dir_x = -math_sin(yaw) * (prop.collisionbox[4] + 0.5)
 		local dir_z = math_cos(yaw) * (prop.collisionbox[4] + 0.5)
-		local nod = core.get_node_or_nil({
-			x = pos.x + dir_x,
-			y = pos.y + 0.5,
-			z = pos.z + dir_z
-		})
-
-		-- get current velocity
-		local v = self.object:get_velocity()
+		local nod = core.get_node({x = pos.x + dir_x, y = pos.y + 0.5, z = pos.z + dir_z})
 
 		-- can only climb solid facings
-		if not nod or not core.registered_nodes[nod.name]
+		if not core.registered_nodes[nod.name]
 		or not core.registered_nodes[nod.name].walkable then
-			self.disable_falling = nil
-			v.y = 0
-			self.object:set_velocity(v)
-			return
+			self.disable_falling = nil ; return
 		end
 
 --print ("----", nod.name, self.disable_falling, dtime)
@@ -194,13 +184,9 @@ mobs:register_mob("mobs_monster:spider", {
 		-- turn off falling if attached to facing
 		self.disable_falling = true
 
-		-- move up facing
-		v.x = 0 ; v.y = 0
-		v.y = self.jump_height
-
 		self:set_animation("jump")
 
-		self.object:set_velocity(v)
+		self.object:set_velocity({x = 0, y = self.jump_height, z = 0})
 	end,
 
 	-- make spiders jump at you on attack
