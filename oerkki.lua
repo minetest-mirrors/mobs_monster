@@ -19,7 +19,8 @@ mobs:register_mob("mobs_monster:oerkki", {
 	textures = {
 		{"mobs_oerkki.png"},
 		{"mobs_oerkki2.png"},
-		{"mobs_oerkki3.png"}
+		{"mobs_oerkki3.png"},
+		{"mobs_oerkki4.png"}
 	},
 	makes_footstep_sound = false,
 	sounds = {random = "mobs_oerkki"},

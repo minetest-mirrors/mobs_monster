@@ -52,6 +52,14 @@ local spider_types = {
 		drops = {
 			{name = "farming:string", chance = 1, min = 0, max = 2},
 			{name = "ethereal:crystal_spike", chance = 15, min = 1, max = 2}}
+	},
+
+	{	nodes = {"default:permafrost_with_stones", "default:dirt_with_coniferous_litter",
+			"ethereal:gray_dirt"},
+		skins = {"mobs_spider_dark.png"},
+		docile = nil,
+		drops = nil,
+		shoot = true
 	}
 }
 
@@ -77,7 +85,8 @@ mobs:register_mob("mobs_monster:spider", {
 		{"mobs_spider_orange.png"},
 		{"mobs_spider_snowy.png"},
 		{"mobs_spider_grey.png"},
-		{"mobs_spider_crystal.png"}
+		{"mobs_spider_crystal.png"},
+		{"mobs_spider_dark.png"},
 	},
 	makes_footstep_sound = false,
 	sounds = {
@@ -127,9 +136,10 @@ mobs:register_mob("mobs_monster:spider", {
 				if tmp.shoot then
 					self.attack_type = "dogshoot"
 					self.arrow = "mobs_monster:cobweb"
+					self.fly_in = "mobs:cobweb"
 					self.dogshoot_switch = 1
-					self.dogshoot_count_max = 60
-					self.dogshoot_count2_max = 20
+					self.dogshoot_count_max = 12
+					self.dogshoot_count2_max = 5
 					self.shoot_interval = 2
 					self.shoot_offset = 2
 				end
@@ -201,7 +211,8 @@ if not mobs.custom_spawn_monster then
 		name = "mobs_monster:spider",
 		nodes = {
 			"default:dirt_with_rainforest_litter", "default:snowblock",
-			"default:snow", "ethereal:crystal_dirt", "ethereal:cold_dirt"
+			"default:snow", "ethereal:crystal_dirt", "ethereal:cold_dirt",
+			"ethereal:gray_dirt", "default:permafrost_with_stones"
 		},
 		min_light = 0,
 		max_light = 8,

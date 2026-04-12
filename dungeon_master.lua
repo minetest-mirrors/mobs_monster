@@ -37,7 +37,8 @@ mobs:register_mob("mobs_monster:dungeon_master", {
 	textures = {
 		{"mobs_dungeon_master.png"},
 		{"mobs_dungeon_master2.png"},
-		{"mobs_dungeon_master3.png"}
+		{"mobs_dungeon_master3.png"},
+		{"mobs_dungeon_master4.png"}
 	},
 	makes_footstep_sound = true,
 	sounds = {
