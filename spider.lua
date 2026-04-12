@@ -97,11 +97,11 @@ mobs:register_mob("mobs_monster:spider", {
 	fall_damage = false,
 --	node_damage = false, -- disable damage_per_second node damage
 	animation = {
-		speed_normal = 15, speed_run = 20,
+		speed_normal = 15,
 		stand_start = 0, stand_end = 0,
 		walk_start = 1, walk_end = 21,
-		run_start = 1, run_end = 21, run_speed = 40,
-		punch_start = 25, punch_end = 45
+		run_start = 1, run_end = 21, run_speed = 30,
+		punch_start = 25, punch_end = 45, punch_speed = 30
 	},
 
 	-- check surrounding nodes and spawn a specific spider
@@ -174,6 +174,12 @@ mobs:register_mob("mobs_monster:spider", {
 	-- make spiders jump at you on attack
 	custom_attack = function(self, pos)
 
+		self.cus_attack_timer = (self.cus_attack_timer or 0) + 1
+		if self.cus_attack_timer < 3 then return true end -- do normal attack
+		self.cus_attack_timer = 0
+
+		-- do jump attack
+
 		local vel = self.object:get_velocity()
 
 		self.object:set_velocity({
@@ -181,8 +187,6 @@ mobs:register_mob("mobs_monster:spider", {
 			y = self.jump_height * 1.5,
 			z = vel.z * self.run_velocity
 		})
-
-		self.pausetimer = 0.5
 
 		return true -- continue rest of attack function
 	end
