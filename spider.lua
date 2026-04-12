@@ -7,8 +7,7 @@ local function get_velocity(self)
 
 	local v = self.object:get_velocity()
 
-	-- sanity check
-	if not v then return 0 end
+	if not v then return 0 end -- sanity check
 
 	return (v.x * v.x + v.z * v.z) ^ 0.5
 end
@@ -95,6 +94,7 @@ mobs:register_mob("mobs_monster:spider", {
 	water_damage = 5,
 	lava_damage = 5,
 	light_damage = 0,
+	fall_damage = false,
 --	node_damage = false, -- disable damage_per_second node damage
 	animation = {
 		speed_normal = 15, speed_run = 20,
@@ -157,32 +157,14 @@ mobs:register_mob("mobs_monster:spider", {
 		if self.spider_timer < 0.25 then return end
 		self.spider_timer = 0
 
-		-- need to be stopped to go onwards
-		if get_velocity(self) > 0.5 then
-			self.disable_falling = nil
-			return
-		end
+--print ("----", self.looking_at, self.disable_falling, dtime)
 
-		local pos = self.object:get_pos()
-		local yaw = self.object:get_yaw() ; if not yaw then return end
-		local prop = self.object:get_properties()
-
-		pos.y = pos.y + prop.collisionbox[2] - 0.2
-
-		local dir_x = -math_sin(yaw) * (prop.collisionbox[4] + 0.5)
-		local dir_z = math_cos(yaw) * (prop.collisionbox[4] + 0.5)
-		local nod = core.get_node({x = pos.x + dir_x, y = pos.y + 0.5, z = pos.z + dir_z})
-
-		-- can only climb solid facings
-		if not core.registered_nodes[nod.name]
-		or not core.registered_nodes[nod.name].walkable then
+		if not core.registered_nodes[self.looking_at]
+		or not core.registered_nodes[self.looking_at].walkable then
 			self.disable_falling = nil ; return
 		end
 
---print ("----", nod.name, self.disable_falling, dtime)
-
-		-- turn off falling if attached to facing
-		self.disable_falling = true
+		self.disable_falling = true -- disable falling if climbing solid surface
 
 		self:set_animation("jump")
 
