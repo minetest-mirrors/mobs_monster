@@ -31,9 +31,9 @@ mobs:register_mob("mobs_monster:dungeon_master", {
 	hp_min = 42,
 	hp_max = 75,
 	armor = 60,
-	collisionbox = {-0.7, -1, -0.7, 0.7, 1.6, 0.7},
+	collisionbox = {-0.5, -1, -0.5, 0.5, 1.6, 0.5},
 	visual = "mesh",
-	mesh = "mobs_dungeon_master.b3d",
+	mesh = "mobs_dungeon_master.b3d", glow = 1,
 	textures = {
 		{"mobs_dungeon_master.png"},
 		{"mobs_dungeon_master2.png"},

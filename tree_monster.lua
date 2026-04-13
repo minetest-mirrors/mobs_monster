@@ -22,7 +22,7 @@ local tree_types = {
 			{name = "ethereal:frost_leaves", chance = 1, min = 1, max = 2},
 			{name = "ethereal:frost_tree", chance = 2, min = 1, max = 2},
 			{name = "ethereal:crystal_spike", chance = 4, min = 0, max = 2}
-		}, glow = 1
+		}, glow = 2
 	},
 
 	{	nodes = {"ethereal:yellowleaves"},
@@ -32,7 +32,7 @@ local tree_types = {
 			{name = "ethereal:yellowleaves", chance = 1, min = 1, max = 2},
 			{name = "ethereal:yellow_tree_sapling", chance = 2, min = 0, max = 2},
 			{name = "ethereal:golden_apple", chance = 3, min = 0, max = 2}
-		}, glow = 1
+		}, glow = 2
 	},
 
 	{	nodes = {"default:acacia_bush_leaves"},
@@ -61,7 +61,7 @@ mobs:register_mob("mobs_monster:tree_monster", {
 	armor = 100,
 	collisionbox = {-0.3, -1, -0.3, 0.3, 0.75, 0.3},
 	visual = "mesh",
-	mesh = "mobs_tree_monster.b3d",
+	mesh = "mobs_tree_monster.b3d", glow = 1,
 	textures = {
 		{"mobs_tree_monster.png"},
 		{"mobs_tree_monster2.png"}

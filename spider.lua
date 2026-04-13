@@ -79,7 +79,7 @@ mobs:register_mob("mobs_monster:spider", {
 	collisionbox = {-0.7, -0.5, -0.7, 0.7, 0, 0.7},
 	visual_size = {x = 1, y = 1},
 	visual = "mesh",
-	mesh = "mobs_spider.b3d",
+	mesh = "mobs_spider.b3d", glow = 1,
 	textures = {
 		{"mobs_spider_mese.png"},
 		{"mobs_spider_orange.png"},

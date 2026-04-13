@@ -15,7 +15,7 @@ mobs:register_mob("mobs_monster:oerkki", {
 	armor = 100,
 	collisionbox = {-0.35, -1, -0.35, 0.35, 0.85, 0.35},
 	visual = "mesh",
-	mesh = "mobs_oerkki.b3d",
+	mesh = "mobs_oerkki.b3d", glow = 4,
 	textures = {
 		{"mobs_oerkki.png"},
 		{"mobs_oerkki2.png"},

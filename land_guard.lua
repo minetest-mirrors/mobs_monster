@@ -45,7 +45,7 @@ mobs:register_mob("mobs_monster:land_guard", {
 	collisionbox = {-0.5, -1.01, -0.5, 0.5, 1.6, 0.5},
 	visual_size = {x = 1, y = 1},
 	visual = "mesh",
-	mesh = "mobs_dungeon_master.b3d",
+	mesh = "mobs_dungeon_master.b3d", glow = 1,
 	textures = {
 		{"mobs_land_guard.png"},
 		{"mobs_land_guard2.png"},
