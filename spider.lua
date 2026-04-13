@@ -97,6 +97,7 @@ mobs:register_mob("mobs_monster:spider", {
 	run_velocity = 3,
 	view_range = 15,
 	floats = 0,
+	fly_in = "mobs:cobweb",
 	drops = {
 		{name = "farming:string", chance = 1, min = 0, max = 2}
 	},
@@ -136,7 +137,6 @@ mobs:register_mob("mobs_monster:spider", {
 				if tmp.shoot then
 					self.attack_type = "dogshoot"
 					self.arrow = "mobs_monster:cobweb"
-					self.fly_in = "mobs:cobweb"
 					self.dogshoot_switch = 1
 					self.dogshoot_count_max = 12
 					self.dogshoot_count2_max = 5
@@ -264,7 +264,10 @@ core.register_node(":mobs:cobweb", {
 	groups = {snappy = 1, disable_jump = 1},
 	is_ground_content = false,
 	drop = "farming:string",
-	sounds = mobs.node_sound_leaves_defaults()
+	sounds = mobs.node_sound_leaves_defaults(),
+	on_timer = function(pos)
+		core.remove_node(pos)
+	end
 })
 
 core.register_craft({
@@ -286,6 +289,7 @@ local web_place = function(pos)
 
 	if pos2 then
 		core.swap_node(pos2, {name = "mobs:cobweb"})
+		core.get_node_timer(pos2):start(20)
 	end
 end
 
