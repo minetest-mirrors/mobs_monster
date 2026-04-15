@@ -105,6 +105,7 @@ mobs:register_mob("mobs_monster:spider", {
 	lava_damage = 5,
 	light_damage = 0,
 	fall_damage = false,
+	fear_height = 8,
 --	node_damage = false, -- disable damage_per_second node damage
 	animation = {
 		speed_normal = 15,
@@ -172,9 +173,16 @@ mobs:register_mob("mobs_monster:spider", {
 		local def1 = core.registered_nodes[self.looking_at]
 		local def2 = core.registered_nodes[self.looking_above]
 
+		local rot = self.object:get_rotation()
+
 		if not def1.walkable or not def2.walkable then
+			rot.x = 0 -- back to ground
+			self.object:set_rotation(rot)
 			self.disable_falling = nil ; return
 		end
+
+		rot.x = 1.5 -- on wall
+		self.object:set_rotation(rot)
 
 		self.disable_falling = true -- disable falling if climbing solid surface
 
