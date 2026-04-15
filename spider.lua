@@ -167,10 +167,12 @@ mobs:register_mob("mobs_monster:spider", {
 		if self.spider_timer < 0.25 then return end
 		self.spider_timer = 0
 
---print ("----", self.looking_at, self.disable_falling, dtime)
+--print ("----", self.looking_at, self.looking_above, self.disable_falling, dtime)
 
-		if not core.registered_nodes[self.looking_at]
-		or not core.registered_nodes[self.looking_at].walkable then
+		local def1 = core.registered_nodes[self.looking_at]
+		local def2 = core.registered_nodes[self.looking_above]
+
+		if not def1.walkable or not def2.walkable then
 			self.disable_falling = nil ; return
 		end
 
