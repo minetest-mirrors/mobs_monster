@@ -173,16 +173,12 @@ mobs:register_mob("mobs_monster:spider", {
 		local def1 = core.registered_nodes[self.looking_at]
 		local def2 = core.registered_nodes[self.looking_above]
 
-		local rot = self.object:get_rotation()
-
 		if not def1.walkable or not def2.walkable then
-			rot.x = 0 -- back to ground
-			self.object:set_rotation(rot)
+			self:set_pitch() -- reset back on ground
 			self.disable_falling = nil ; return
 		end
 
-		rot.x = 1.5 -- on wall
-		self.object:set_rotation(rot)
+		self:set_pitch(1.5) -- climbing wall
 
 		self.disable_falling = true -- disable falling if climbing solid surface
 
