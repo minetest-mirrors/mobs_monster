@@ -16,6 +16,7 @@ local master_types = {
 -- Dungeon Master by PilzAdam
 
 mobs:register_mob("mobs_monster:dungeon_master", {
+	description = S("Dungeon Master"),
 	type = "monster",
 	passive = false,
 	damage = 6,

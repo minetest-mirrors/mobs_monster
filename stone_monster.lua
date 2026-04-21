@@ -27,6 +27,7 @@ local stone_types = {
 -- Stone Monster by PilzAdam
 
 mobs:register_mob("mobs_monster:stone_monster", {
+	description = S("Stone Monster"),
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",

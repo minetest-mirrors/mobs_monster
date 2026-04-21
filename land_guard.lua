@@ -33,6 +33,7 @@ local guard_types = {
 -- Land Guard
 
 mobs:register_mob("mobs_monster:land_guard", {
+	description = S("Land Guard"),
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",

@@ -17,6 +17,7 @@ local dirt_types = {
 -- Dirt Monster by PilzAdam
 
 mobs:register_mob("mobs_monster:dirt_monster", {
+	description = S("Dirt Monster"),
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",

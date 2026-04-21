@@ -4,6 +4,7 @@ local S = core.get_translator("mobs_monster")
 -- Lava Flan by Zeg9 (additional textures by JurajVajda)
 
 mobs:register_mob("mobs_monster:lava_flan", {
+	description = S("Lava Flan"),
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
@@ -229,6 +230,7 @@ end
 -- obsidian flan
 
 mobs:register_mob("mobs_monster:obsidian_flan", {
+	description = S("Obsidian Flan"),
 	type = "monster",
 	passive = false,
 	attack_type = "shoot",

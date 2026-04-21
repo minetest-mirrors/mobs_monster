@@ -49,6 +49,7 @@ local tree_types = {
 -- Tree Monster (or Tree Gollum) by PilzAdam
 
 mobs:register_mob("mobs_monster:tree_monster", {
+	description = S("Tree Monster"),
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",

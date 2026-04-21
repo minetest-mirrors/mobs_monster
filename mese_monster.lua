@@ -135,6 +135,7 @@ local mese_monster_types = {
 -- Mese Monster by SirrobZeroone
 
 mobs:register_mob("mobs_monster:mese_monster", {
+	description = S("Mese Monster"),
 	type = "monster",
 	visual_size = {x = 10, y = 10},  -- Got scale wrong in blender by factor of 10 - S01
 	passive = false,

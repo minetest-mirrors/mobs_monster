@@ -66,6 +66,7 @@ local spider_types = {
 -- Spider by AspireMint (CC-BY-SA 3.0 license)
 
 mobs:register_mob("mobs_monster:spider", {
+	description = S("Spider"),
 	--docile_by_day = true,
 	group_attack = true,
 	type = "monster",

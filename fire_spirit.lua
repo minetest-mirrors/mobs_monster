@@ -16,6 +16,7 @@ end
 -- Fire Spirit
 
 mobs:register_mob("mobs_monster:fire_spirit", {
+	description = S("Fire Spirit"),
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",

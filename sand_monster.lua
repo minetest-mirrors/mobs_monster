@@ -32,6 +32,7 @@ end
 -- Sand Monster by PilzAdam
 
 mobs:register_mob("mobs_monster:sand_monster", {
+	description = S("Sand Monster"),
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",

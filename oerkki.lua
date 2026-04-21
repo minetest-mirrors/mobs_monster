@@ -4,10 +4,10 @@ local S = core.get_translator("mobs_monster")
 -- Oerkki by PilzAdam
 
 mobs:register_mob("mobs_monster:oerkki", {
+	description = S("Oerkki"),
 	type = "monster",
 	passive = false,
 	attack_type = "dogfight",
-	pathfinding = true,
 	reach = 2,
 	damage = 4,
 	hp_min = 8,
