@@ -308,11 +308,7 @@ mobs:register_arrow("mobs_monster:cobweb", {
 	textures = {"mobs_cobweb.png"},
 	collisionbox = {-0.1, -0.1, -0.1, 0.1, 0.1, 0.1},
 	velocity = 15,
-	tail = 1,
-	tail_texture = "mobs_cobweb.png",
-	tail_size = 5,
 	glow = 2,
-	expire = 0.1,
 
 	hit_player = function(self, player)
 
