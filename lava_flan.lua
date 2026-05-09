@@ -276,57 +276,34 @@ mobs:register_arrow("mobs_monster:obsidian_arrow", {
 	visual_size = {x = 0.5, y = 0.5},
 	textures = {"default_obsidian_shard.png"},
 	velocity = 6,
-	physical = false, -- so we can remove nodes the arrow is inside of
 
-	-- since arrows arent physical we dont need hit_mob hit_node etc.
-	on_step = function(self, dtime, moveresult)
+	hit_player = function(self, player)
 
-		self.ntimer = (self.ntimer or 0) + dtime
-		if self.ntimer < 0.15 then return false end
-		self.ntimer = 0
+		player:punch(self.object, 1.0,
+				{full_punch_interval = 1.0, damage_groups = {fleshy = 8}}, nil)
+	end,
 
-		local pos = self.object:get_pos()
+	hit_mob = function(self, player)
 
-		-- check for entities near arrow
-		for _,obj in pairs(core.get_objects_inside_radius(pos, 1)) do
+		player:punch(self.object, 1.0,
+				{full_punch_interval = 1.0, damage_groups = {fleshy = 8}}, nil)
+	end,
 
-			local do_damage = false
+	hit_node = function(self, pos, node)
 
-			if obj:get_player_name() ~= "" then
-				do_damage = true -- player
-			else
-				local ent = obj:get_luaentity()
+		pos = self.node_pos or pos -- use stored node position instead of arrow
 
-				if ent and ent.name ~= "__builtin:item"
-				and ent.name ~= "mobs_monster:obsidian_arrow"
-				and ent.name ~= "mobs_monster:obsidian_flan" then
-					do_damage = true -- mob
-				end
-			end
+		if mobs_griefing == false or core.is_protected(pos, "") then return end
 
-			if do_damage then
-
-				obj:punch(self.object, 1.0,
-						{full_punch_interval = 1.0, damage_groups = {fleshy = 8}}, nil)
-
-				self.object:remove() ; return false
-			end
-		end
-
-		local nod = core.get_node(pos)
-		local def = core.registered_items[nod.name] ; if not def then return false end
-
-		if def.buildable_to then return false end ; self.object:remove()
-
-		if not mobs_griefing or core.is_protected(pos, "") then return false end
-
-		-- do not break level 2 blocks like obsidian, or unbreakable
-		if (def.groups.level and def.groups.level > 1) or def.groups.unbreakable then
-			return false
-		end
+		local radius = 1
+		local def = node and core.registered_nodes[node.name] ; if not def then return end
 
 		local texture = def.tiles and def.tiles[1] or "mobs_fallback.png"
-		local radius = 1
+
+		-- do not break level 2 nodes like obsidian, or unbreakable nodes
+		if (def.groups.level and def.groups.level > 1) or def.groups.unbreakable then
+			return
+		end
 
 		core.add_particlespawner({
 			amount = 16,
@@ -343,7 +320,7 @@ mobs:register_arrow("mobs_monster:obsidian_arrow", {
 			maxsize = radius,
 			texture = texture,
 			-- ^ only as fallback for clients without support for `node` parameter
-			node = nod,
+			node = node,
 			collisiondetection = true
 		})
 
@@ -352,7 +329,5 @@ mobs:register_arrow("mobs_monster:obsidian_arrow", {
 		local snd = def.sounds and def.sounds.dug or "default_dig_crumbly"
 
 		core.sound_play(snd, {pos = pos, max_hear_distance = 8}, true)
-
-		return false -- returning false skips all other arrow checks
 	end
 })
