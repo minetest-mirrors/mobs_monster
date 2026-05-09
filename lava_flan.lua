@@ -47,16 +47,12 @@ mobs:register_mob("mobs_monster:lava_flan", {
 	fly_in = {"default:lava_source", "default:lava_flowing", "nether:lava_source"},
 	animation = {
 		speed_normal = 15,
-		speed_run = 15,
-		stand_start = 0,
-		stand_end = 8,
-		walk_start = 10,
-		walk_end = 18,
-		run_start = 20,
-		run_end = 28,
-		punch_start = 20,
-		punch_end = 28
+		stand_start = 0, stand_end = 8,
+		walk_start = 10, walk_end = 18,
+		run_start = 20, run_end = 28, speed_run = 15,
+		punch_start = 20, punch_end = 28
 	},
+	glow = 10,
 
 	-- custom death function
 	on_die = function(self, pos)
@@ -64,7 +60,7 @@ mobs:register_mob("mobs_monster:lava_flan", {
 		local cod = self.cause_of_death or {}
 		local def = cod.node and core.registered_nodes[cod.node]
 
-		if def and def.groups and def.groups.water then
+		if def and def.groups.water then
 
 			pos.y = pos.y + 1
 
@@ -94,8 +90,7 @@ mobs:register_mob("mobs_monster:lava_flan", {
 
 			self.object:remove()
 		end
-	end,
-	glow = 10
+	end
 })
 
 -- where to spawn
@@ -129,11 +124,7 @@ core.register_craftitem(":mobs:lava_orb", {
 
 core.register_alias("zmobs:lava_orb", "mobs:lava_orb")
 
-core.register_craft({
-	type = "fuel",
-	recipe = "mobs:lava_orb",
-	burntime = 80
-})
+core.register_craft({type = "fuel", recipe = "mobs:lava_orb", burntime = 80})
 
 -- backup and replace old function
 
@@ -142,7 +133,7 @@ local old_handle_node_drops = core.handle_node_drops
 function core.handle_node_drops(pos, drops, digger)
 
 	-- are we a player using the lava pick?
-	if digger and digger:get_wielded_item():get_name() == ("mobs:pick_lava") then
+	if digger and digger:get_wielded_item():get_name() == "mobs:pick_lava" then
 
 		local hot_drops = {}
 		local is_cooked
@@ -235,7 +226,7 @@ mobs:register_mob("mobs_monster:obsidian_flan", {
 	passive = false,
 	attack_type = "shoot",
 	shoot_interval = 0.5,
-	shoot_offset = 1.0,
+	shoot_offset = 1.5,
 	arrow = "mobs_monster:obsidian_arrow",
 	reach = 2,
 	damage = 3,
@@ -274,8 +265,7 @@ mobs:register_mob("mobs_monster:obsidian_flan", {
 
 -- spawn egg
 
-mobs:register_egg("mobs_monster:obsidian_flan", S("Obsidian Flan"),
-		"default_obsidian.png", 1)
+mobs:register_egg("mobs_monster:obsidian_flan", S("Obsidian Flan"), "default_obsidian.png", 1)
 
 -- obsidian arrow and grief setting check
 
@@ -286,47 +276,60 @@ mobs:register_arrow("mobs_monster:obsidian_arrow", {
 	visual_size = {x = 0.5, y = 0.5},
 	textures = {"default_obsidian_shard.png"},
 	velocity = 6,
+	physical = false, -- so we can remove nodes the arrow is inside of
 
-	hit_player = function(self, player)
+	-- since arrows arent physical we dont need hit_mob hit_node etc.
+	on_step = function(self, dtime, moveresult)
 
-		player:punch(self.object, 1.0, {
-			full_punch_interval = 1.0,
-			damage_groups = {fleshy = 8},
-		}, nil)
-	end,
+		self.ntimer = (self.ntimer or 0) + dtime
+		if self.ntimer < 0.15 then return false end
+		self.ntimer = 0
 
-	hit_mob = function(self, player)
+		local pos = self.object:get_pos()
 
-		player:punch(self.object, 1.0, {
-			full_punch_interval = 1.0,
-			damage_groups = {fleshy = 8},
-		}, nil)
-	end,
+		-- check for entities near arrow
+		for _,obj in pairs(core.get_objects_inside_radius(pos, 1)) do
 
-	hit_node = function(self, pos, node)
+			local do_damage = false
 
-		if mobs_griefing == false or core.is_protected(pos, "") then
-			return
+			if obj:get_player_name() ~= "" then
+				do_damage = true -- player
+			else
+				local ent = obj:get_luaentity()
+
+				if ent and ent.name ~= "__builtin:item"
+				and ent.name ~= "mobs_monster:obsidian_arrow"
+				and ent.name ~= "mobs_monster:obsidian_flan" then
+					do_damage = true -- mob
+				end
+			end
+
+			if do_damage then
+
+				obj:punch(self.object, 1.0,
+						{full_punch_interval = 1.0, damage_groups = {fleshy = 8}}, nil)
+
+				self.object:remove() ; return false
+			end
 		end
 
-		local texture = "default_dirt.png" --fallback texture
+		local nod = core.get_node(pos)
+		local def = core.registered_items[nod.name] ; if not def then return false end
+
+		if def.buildable_to then return false end ; self.object:remove()
+
+		if not mobs_griefing or core.is_protected(pos, "") then return false end
+
+		-- do not break level 2 blocks like obsidian, or unbreakable
+		if (def.groups.level and def.groups.level > 1) or def.groups.unbreakable then
+			return false
+		end
+
+		local texture = def.tiles and def.tiles[1] or "mobs_fallback.png"
 		local radius = 1
-		local def = node and core.registered_nodes[node.name]
-
-		if not def then return end
-
-		if def and def.tiles and def.tiles[1] then
-			texture = def.tiles[1]
-		end
-
-		-- do not break obsidian or diamond blocks or unbreakable nodes
-		if (def.groups and def.groups.level and def.groups.level > 1)
-		or def.groups.unbreakable then
-			return
-		end
 
 		core.add_particlespawner({
-			amount = 32,
+			amount = 16,
 			time = 0.1,
 			minpos = vector.subtract(pos, radius / 2),
 			maxpos = vector.add(pos, radius / 2),
@@ -340,14 +343,16 @@ mobs:register_arrow("mobs_monster:obsidian_arrow", {
 			maxsize = radius,
 			texture = texture,
 			-- ^ only as fallback for clients without support for `node` parameter
-			node = node,
+			node = nod,
 			collisiondetection = true
 		})
 
-		core.set_node(pos, {name = "air"})
+		core.remove_node(pos)
 
 		local snd = def.sounds and def.sounds.dug or "default_dig_crumbly"
 
 		core.sound_play(snd, {pos = pos, max_hear_distance = 8}, true)
+
+		return false -- returning false skips all other arrow checks
 	end
 })
