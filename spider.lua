@@ -154,8 +154,8 @@ mobs:register_mob("mobs_monster:spider", {
 
 --print ("----", self.looking_at, self.looking_above, self.disable_falling, dtime)
 
-		local def1 = core.registered_nodes[self.looking_at]
-		local def2 = core.registered_nodes[self.looking_above]
+		local def1 = core.registered_nodes[self.looking_at] or {}
+		local def2 = core.registered_nodes[self.looking_above] or {}
 
 		if not def1.walkable or not def2.walkable then
 			self:set_pitch() -- reset back on ground
