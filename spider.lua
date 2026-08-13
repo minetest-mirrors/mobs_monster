@@ -112,7 +112,6 @@ mobs:register_mob("mobs_monster:spider", {
 			if core.find_node_near(pos, 1, tmp.nodes) then
 
 				self.base_texture = tmp.skins
-				self.object:set_properties({textures = tmp.skins})
 				self.docile_by_day = tmp.docile
 
 				if tmp.drops then self.drops = tmp.drops end
@@ -129,15 +128,14 @@ mobs:register_mob("mobs_monster:spider", {
 					self.shoot_offset = 2
 				end
 
-				if tmp.small then
+				local props = {textures = tmp.skins}
 
-					self.object:set_properties({
-						collisionbox = {-0.2, -0.2, -0.2, 0.2, 0, 0.2},
-						visual_size = {x = 0.25, y = 0.25}
-					})
+				if tmp.small then
+					props.collisionbox = {-0.2, -0.15, -0.2, 0.2, 0, 0.2}
+					props.visual_size = {x = 0.25, y = 0.25}
 				end
 
-				break
+				self.object:set_properties(props) ; break
 			end
 		end
 
