@@ -27,6 +27,7 @@ mobs:register_mob("mobs_monster:oerkki", {
 	walk_velocity = 1,
 	run_velocity = 3,
 	view_range = 10,
+	fall_speed = -8,
 	drops = {
 		{name = "default:obsidian", chance = 3, min = 0, max = 2},
 		{name = "default:gold_lump", chance = 2, min = 0, max = 2}
