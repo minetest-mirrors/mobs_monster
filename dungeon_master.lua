@@ -28,7 +28,7 @@ mobs:register_mob("mobs_monster:dungeon_master", {
 	shoot_interval = 2.2,
 	arrow = "mobs_monster:fireball",
 	friendly_fire = false,
-	shoot_offset = 1.4,
+	shoot_offset = 0.4,
 	hp_min = 42,
 	hp_max = 75,
 	armor = 60,
