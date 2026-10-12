@@ -125,7 +125,7 @@ mobs:register_mob("mobs_monster:spider", {
 					self.dogshoot_count_max = 12
 					self.dogshoot_count2_max = 5
 					self.shoot_interval = 2
-					self.shoot_offset = 2
+					self.shoot_offset = 0.1
 				end
 
 				local props = {textures = tmp.skins}
