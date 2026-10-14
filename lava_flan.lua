@@ -296,6 +296,10 @@ mobs:register_arrow("mobs_monster:obsidian_arrow", {
 
 		if mobs_griefing == false or core.is_protected(pos, "") then return end
 
+		-- check for meta (containers)
+		local meta = core.find_nodes_with_meta(pos, pos)
+		if #meta > 0 then return end
+
 		local radius = 1
 		local def = node and core.registered_nodes[node.name] ; if not def then return end
 
