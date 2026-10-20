@@ -32,7 +32,7 @@ mobs:register_mob("mobs_monster:oerkki", {
 		{name = "default:obsidian", chance = 3, min = 0, max = 2},
 		{name = "default:gold_lump", chance = 2, min = 0, max = 2}
 	},
---	drops = function(pos)
+--	drops = function(self, pos)
 --		print("--- Oerkki died at", pos)
 --		return { {name = "default:wood", chance = 1, min = 0, max = 3} }
 --	end,
